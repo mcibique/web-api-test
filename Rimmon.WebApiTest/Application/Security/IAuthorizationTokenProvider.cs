@@ -1,20 +1,18 @@
 ﻿// -----------------------------------------------------------------------
-//  <copyright file="ISecurityManagement.cs" author="Rimmon">
+//  <copyright file="IAuthorizationTokenProvider.cs" author="Rimmon">
 //      Copyright (c) Rimmon All rights reserved.
 //  </copyright>
 // -----------------------------------------------------------------------
 
-namespace Rimmon.WebApiTest.Data
+namespace Rimmon.WebApiTest.Security
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
-    public interface ISecurityManagement
+    public interface IAuthorizationTokenProvider
     {
         #region Abstract Members
 
-        Task<IEnumerable<string>> GetRoles(string userName);
-        Task<bool> ValidateUser(string userName, string password);
+        string CreateTokenFor(string userName, IEnumerable<string> roles);
 
         #endregion
     }

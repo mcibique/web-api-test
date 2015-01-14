@@ -45,6 +45,11 @@
     <Reference Include="StructureMap.Net4">
       <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.1\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -71,9 +76,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Configuration\WebConfigSection.cs" />
+    <Compile Include="Application\Configuration\WebConfigSecuritySection.cs" />
+    <Compile Include="Application\Security\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Application\Security\IAuthorizationTokenProvider.cs" />
+    <Compile Include="Application\Security\JwtAuthorizationDelegatingHandler.cs" />
+    <Compile Include="Application\Security\JwtAuthorizationTokenProvider.cs" />
     <Compile Include="Application\WebApiTestBodyModelValidator.cs" />
     <Compile Include="Application\StructureMapDependencyResolver.cs" />
     <Compile Include="Application\WebApiTestApplication.cs" />
+    <Compile Include="Application\Configuration\WebConfig.cs" />
+    <Compile Include="Application\WebApiTestController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

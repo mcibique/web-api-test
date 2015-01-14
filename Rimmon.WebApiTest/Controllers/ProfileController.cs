@@ -12,7 +12,7 @@ namespace Rimmon.WebApiTest.Controllers
     using Rimmon.WebApiTest.Data;
 
     [RoutePrefix("api/profile")]
-    public class ProfileController : ApiController
+    public class ProfileController : WebApiTestController
     {
         #region Fields
 
@@ -38,9 +38,10 @@ namespace Rimmon.WebApiTest.Controllers
 
         [HttpGet]
         [Route("")]
+        [AuthorizeRoles(Roles.Users)]
         public async Task<IHttpActionResult> GetProfile()
         {
-            return this.Ok(await this._profileManagement.GetProfile("currentUser"));
+            return this.Ok(await this._profileManagement.GetProfile(this.UserName));
         }
 
         #endregion

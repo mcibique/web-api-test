@@ -13,6 +13,7 @@ namespace Rimmon.WebApiTest
     using System.Web.Http.Validation;
     using Newtonsoft.Json.Serialization;
     using Rimmon.WebApiTest.Data;
+    using Rimmon.WebApiTest.Security;
     using StructureMap;
 
     public class WebApiTestApplication : HttpApplication
@@ -27,6 +28,8 @@ namespace Rimmon.WebApiTest
                 this.ConfigureFormatters(config);
                 this.ConfigureRoutes(config);
                 this.ConfigureModelValidators(config);
+                this.ConfigureFilters(config);
+                this.ConfigureMessageHandlers(config);
             });
         }
 
@@ -41,8 +44,14 @@ namespace Rimmon.WebApiTest
             {
                 registry.For<IProfileManagement>().Use<ProfileManagement>();
                 registry.For<ISecurityManagement>().Use<SecurityManagement>();
+                registry.For<IAuthorizationTokenProvider>().Use<JwtAuthorizationTokenProvider>();
             });
             config.DependencyResolver = new StructureMapDependencyResolver(container);
+        }
+
+        private void ConfigureFilters(HttpConfiguration config)
+        {
+            config.Filters.Add(new AuthorizeAttribute());
         }
 
         private void ConfigureFormatters(HttpConfiguration config)
@@ -52,6 +61,11 @@ namespace Rimmon.WebApiTest
             {
                 jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }
+        }
+
+        private void ConfigureMessageHandlers(HttpConfiguration config)
+        {
+            config.MessageHandlers.Add(new JwtAuthorizationDelegatingHandler());
         }
 
         private void ConfigureModelValidators(HttpConfiguration config)
