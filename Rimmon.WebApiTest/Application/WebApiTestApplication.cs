@@ -6,8 +6,13 @@
 
 namespace Rimmon.WebApiTest
 {
+    using System.Linq;
+    using System.Net.Http.Formatting;
     using System.Web;
     using System.Web.Http;
+    using System.Web.Http.Validation;
+    using Newtonsoft.Json.Serialization;
+    using Rimmon.WebApiTest.Data;
     using StructureMap;
 
     public class WebApiTestApplication : HttpApplication
@@ -19,7 +24,9 @@ namespace Rimmon.WebApiTest
             GlobalConfiguration.Configure(config =>
             {
                 this.ConfigureDependencies(config);
+                this.ConfigureFormatters(config);
                 this.ConfigureRoutes(config);
+                this.ConfigureModelValidators(config);
             });
         }
 
@@ -30,8 +37,28 @@ namespace Rimmon.WebApiTest
         private void ConfigureDependencies(HttpConfiguration config)
         {
             IContainer container = new Container();
-            container.Configure(registry => { });
+            container.Configure(registry =>
+            {
+                registry.For<IProfileManagement>().Use<ProfileManagement>();
+                registry.For<ISecurityManagement>().Use<SecurityManagement>();
+            });
             config.DependencyResolver = new StructureMapDependencyResolver(container);
+        }
+
+        private void ConfigureFormatters(HttpConfiguration config)
+        {
+            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
+            if (jsonFormatter != null)
+            {
+                jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            }
+        }
+
+        private void ConfigureModelValidators(HttpConfiguration config)
+        {
+            var services = config.Services;
+            var current = services.GetBodyModelValidator();
+            services.Replace(typeof(IBodyModelValidator), new WebApiTestBodyModelValidator(current));
         }
 
         private void ConfigureRoutes(HttpConfiguration config)

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rimmon.WebApiTest", "Rimmon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rimmon.WebApiTest.Models", "Rimmon.WebApiTest.Models\Rimmon.WebApiTest.Models.csproj", "{A6558610-FA67-4256-9159-B234FC1BFA60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rimmon.WebApiTest.Data", "Rimmon.WebApiTest.Data\Rimmon.WebApiTest.Data.csproj", "{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A6558610-FA67-4256-9159-B234FC1BFA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6558610-FA67-4256-9159-B234FC1BFA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6558610-FA67-4256-9159-B234FC1BFA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

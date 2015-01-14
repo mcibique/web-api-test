@@ -44,7 +44,14 @@ namespace Rimmon.WebApiTest
 
         public object GetService(Type serviceType)
         {
-            return this._container.GetInstance(serviceType);
+            try
+            {
+                return serviceType.IsAbstract || serviceType.IsInterface ? this._container.TryGetInstance(serviceType) : this._container.GetInstance(serviceType);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
