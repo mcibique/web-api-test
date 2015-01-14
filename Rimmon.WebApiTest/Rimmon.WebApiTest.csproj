@@ -47,6 +47,10 @@
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
@@ -62,11 +66,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\WebApiTestBodyModelValidator.cs" />
     <Compile Include="Application\StructureMapDependencyResolver.cs" />
     <Compile Include="Application\WebApiTestApplication.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,10 +87,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Rimmon.WebApiTest.Data\Rimmon.WebApiTest.Data.csproj">
+      <Project>{D24BDA71-4EC8-4511-82C4-A7AAC5D438C6}</Project>
+      <Name>Rimmon.WebApiTest.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rimmon.WebApiTest.Models\Rimmon.WebApiTest.Models.csproj">
       <Project>{a6558610-fa67-4256-9159-b234fc1bfa60}</Project>
       <Name>Rimmon.WebApiTest.Models</Name>
