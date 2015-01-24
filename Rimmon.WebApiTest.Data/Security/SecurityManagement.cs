@@ -6,6 +6,7 @@
 
 namespace Rimmon.WebApiTest.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Rimmon.WebApiTest.Data
 
         public Task<bool> ValidateUser(string userName, string password)
         {
-            return Task.FromResult(true);
+            return Task.FromResult(userName.Equals("admin", StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion
