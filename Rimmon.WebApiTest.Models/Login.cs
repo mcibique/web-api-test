@@ -12,11 +12,11 @@ namespace Rimmon.WebApiTest.Models
     {
         #region Public Properties
 
-        [Required]
+        [Required(ErrorMessage = "The field is required.")]
         [MaxLength(128)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The field is required.")]
         [MaxLength(128)]
         public string UserName { get; set; }
 

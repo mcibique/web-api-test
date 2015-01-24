@@ -62,7 +62,7 @@ namespace Rimmon.WebApiTest.Controllers
                 this.ModelState.AddModelError("", "Invalid user name or password.");
             }
 
-            return this.BadRequest(this.ModelState);
+            return this.Errors(this.ModelState);
         }
 
         #endregion
