@@ -9,9 +9,9 @@ namespace Rimmon.WebApiTest.Controllers
     using System;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using Rimmon.WebApiTest.Security;
     using Rimmon.WebApiTest.Data;
     using Rimmon.WebApiTest.Models;
+    using Rimmon.WebApiTest.Security;
 
     [AllowAnonymous]
     [RoutePrefix("api/login")]
@@ -19,8 +19,8 @@ namespace Rimmon.WebApiTest.Controllers
     {
         #region Fields
 
-        private readonly ISecurityManagement _securityManagement;
         private readonly IAuthorizationTokenProvider _authorizationTokenProvider;
+        private readonly ISecurityManagement _securityManagement;
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace Rimmon.WebApiTest.Controllers
                 if (result)
                 {
                     var roles = await this._securityManagement.GetRoles(login.UserName);
-                    var token = _authorizationTokenProvider.CreateTokenFor(login.UserName, roles);
+                    var token = this._authorizationTokenProvider.CreateTokenFor(login.UserName, roles);
 
                     return this.Ok(new { valid = true, token });
                 }
