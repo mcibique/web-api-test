@@ -57,7 +57,21 @@ namespace Rimmon.WebApiTest
             }
 
             IPrincipal principal = actionContext.ControllerContext.RequestContext.Principal;
-            return this.MatchAll ? this._roles.All(principal.IsInRole) : this._roles.Any(principal.IsInRole);
+            var result = this.MatchAll ? this._roles.All(principal.IsInRole) : this._roles.Any(principal.IsInRole);
+            if (!result)
+            {
+                var logger = new RequestLogger(actionContext.Request);
+                if (this.MatchAll)
+                {
+                    logger.Debug("Access denied. Expected all [" + String.Join(", ", this._roles) + "]");
+                }
+                else
+                {
+                    logger.Debug("Access denied. Expected any of [" + String.Join(", ", this._roles) + "]");
+                }
+            }
+
+            return result;
         }
 
         #endregion
