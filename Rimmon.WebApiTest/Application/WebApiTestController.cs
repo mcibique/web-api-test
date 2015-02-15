@@ -17,6 +17,14 @@ namespace Rimmon.WebApiTest
     {
         #region Protected Properties
 
+        protected RequestLogger Logger
+        {
+            get
+            {
+                return new RequestLogger(this.Request);
+            }
+        }
+
         protected string UserName
         {
             get

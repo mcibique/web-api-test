@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -78,6 +81,9 @@
   <ItemGroup>
     <Compile Include="Application\Configuration\WebConfigSection.cs" />
     <Compile Include="Application\Configuration\WebConfigSecuritySection.cs" />
+    <Compile Include="Application\Logging\RequestLoggerHandler.cs" />
+    <Compile Include="Application\Logging\RequestLogger.cs" />
+    <Compile Include="Application\Logging\RequestLoggerEntry.cs" />
     <Compile Include="Application\Security\AuthorizeRolesAttribute.cs" />
     <Compile Include="Application\Security\IAuthorizationTokenProvider.cs" />
     <Compile Include="Application\Security\JwtAuthorizationDelegatingHandler.cs" />
@@ -89,6 +95,7 @@
     <Compile Include="Application\WebApiTestController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

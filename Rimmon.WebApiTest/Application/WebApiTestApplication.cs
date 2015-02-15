@@ -12,16 +12,25 @@ namespace Rimmon.WebApiTest
     using System.Web.Http;
     using System.Web.Http.Validation;
     using Newtonsoft.Json.Serialization;
+    using NLog;
     using Rimmon.WebApiTest.Data;
     using Rimmon.WebApiTest.Security;
     using StructureMap;
 
     public class WebApiTestApplication : HttpApplication
     {
+        #region Fields
+
+        protected static readonly Logger Logger = LogManager.GetLogger("web");
+
+        #endregion
+
         #region Protected Methods
 
         protected void Application_Start()
         {
+            Logger.Debug("Application pre-starting.");
+
             GlobalConfiguration.Configure(config =>
             {
                 this.ConfigureDependencies(config);
@@ -30,6 +39,9 @@ namespace Rimmon.WebApiTest
                 this.ConfigureModelValidators(config);
                 this.ConfigureFilters(config);
                 this.ConfigureMessageHandlers(config);
+                this.ConfigureRequestLogging(config);
+
+                Logger.Debug("Application configured successfully.");
             });
         }
 
@@ -73,6 +85,11 @@ namespace Rimmon.WebApiTest
             var services = config.Services;
             var current = services.GetBodyModelValidator();
             services.Replace(typeof(IBodyModelValidator), new WebApiTestBodyModelValidator(current));
+        }
+
+        private void ConfigureRequestLogging(HttpConfiguration config)
+        {
+            config.MessageHandlers.Insert(0, new RequestLoggerHandler());
         }
 
         private void ConfigureRoutes(HttpConfiguration config)
