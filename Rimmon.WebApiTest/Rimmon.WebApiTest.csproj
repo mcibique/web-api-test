@@ -93,6 +93,7 @@
     <Compile Include="Application\WebApiTestApplication.cs" />
     <Compile Include="Application\Configuration\WebConfig.cs" />
     <Compile Include="Application\WebApiTestController.cs" />
+    <Compile Include="Controllers\CreditsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
