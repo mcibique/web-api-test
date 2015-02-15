@@ -11,6 +11,8 @@ namespace Rimmon.WebApiTest
     using System.Web;
     using System.Web.Http;
     using System.Web.Http.Validation;
+    using Microsoft.AspNet.WebApi.MessageHandlers.Compression;
+    using Microsoft.AspNet.WebApi.MessageHandlers.Compression.Compressors;
     using Newtonsoft.Json.Serialization;
     using NLog;
     using Rimmon.WebApiTest.Data;
@@ -38,8 +40,9 @@ namespace Rimmon.WebApiTest
                 this.ConfigureRoutes(config);
                 this.ConfigureModelValidators(config);
                 this.ConfigureFilters(config);
-                this.ConfigureMessageHandlers(config);
+                this.ConfigureAuthentication(config);
                 this.ConfigureRequestLogging(config);
+                this.ConfigureCompression(config);
 
                 Logger.Debug("Application configured successfully.");
             });
@@ -48,6 +51,17 @@ namespace Rimmon.WebApiTest
         #endregion
 
         #region Private Methods
+
+        private void ConfigureAuthentication(HttpConfiguration config)
+        {
+            config.MessageHandlers.Insert(0, new JwtAuthorizationDelegatingHandler());
+        }
+
+        private void ConfigureCompression(HttpConfiguration config)
+        {
+            // https://github.com/azzlack/Microsoft.AspNet.WebApi.MessageHandlers.Compression
+            config.MessageHandlers.Insert(0, new ServerCompressionHandler(256, new GZipCompressor(), new DeflateCompressor()));
+        }
 
         private void ConfigureDependencies(HttpConfiguration config)
         {
@@ -73,11 +87,6 @@ namespace Rimmon.WebApiTest
             {
                 jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }
-        }
-
-        private void ConfigureMessageHandlers(HttpConfiguration config)
-        {
-            config.MessageHandlers.Add(new JwtAuthorizationDelegatingHandler());
         }
 
         private void ConfigureModelValidators(HttpConfiguration config)
