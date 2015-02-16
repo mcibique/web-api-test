@@ -39,6 +39,7 @@ namespace Rimmon.WebApiTest
                 this.ConfigureFormatters(config);
                 this.ConfigureRoutes(config);
                 this.ConfigureModelValidators(config);
+                this.ConfigureErrorHandling(config);
                 this.ConfigureFilters(config);
                 this.ConfigureAuthentication(config);
                 this.ConfigureRequestLogging(config);
@@ -73,6 +74,11 @@ namespace Rimmon.WebApiTest
                 registry.For<IAuthorizationTokenProvider>().Use<JwtAuthorizationTokenProvider>();
             });
             config.DependencyResolver = new StructureMapDependencyResolver(container);
+        }
+
+        private void ConfigureErrorHandling(HttpConfiguration config)
+        {
+            config.IncludeErrorDetailPolicy = WebConfig.IsDebug ? IncludeErrorDetailPolicy.Always : IncludeErrorDetailPolicy.Never;
         }
 
         private void ConfigureFilters(HttpConfiguration config)
