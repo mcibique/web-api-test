@@ -64,6 +64,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -85,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Application\Configuration\WebConfigSection.cs" />
     <Compile Include="Application\Configuration\WebConfigSecuritySection.cs" />
+    <Compile Include="Application\Security\DebugOnlyAttribute.cs" />
     <Compile Include="Application\Logging\RequestLoggerHandler.cs" />
     <Compile Include="Application\Logging\RequestLogger.cs" />
     <Compile Include="Application\Logging\RequestLoggerEntry.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Application\Configuration\WebConfig.cs" />
     <Compile Include="Application\WebApiTestController.cs" />
     <Compile Include="Controllers\CreditsController.cs" />
+    <Compile Include="Controllers\FailController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
