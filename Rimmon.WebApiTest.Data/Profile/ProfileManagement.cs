@@ -15,7 +15,7 @@ namespace Rimmon.WebApiTest.Data
 
         public Task<Profile> GetProfile(string userName)
         {
-            return Task.FromResult(new Profile { FirstName = "First Name", LastName = "Last Name", UserName = userName });
+            return Task.FromResult(new Profile { FirstName = "First Name", LastName = "Last Name", Email = userName + "@email.com" });
         }
 
         #endregion
