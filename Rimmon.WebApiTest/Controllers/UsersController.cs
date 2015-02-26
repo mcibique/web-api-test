@@ -38,10 +38,11 @@ namespace Rimmon.WebApiTest.Controllers
 
         #region Public Methods
 
-        [HttpPatch]
+        [HttpPost]
         [Route("{id}/block")]
         public async Task<IHttpActionResult> BlockUser(long id)
         {
+            // TODO: REST anti-pattern; use Deltas from OData and HttpPatch.
             User result = await this._userManagement.BlockUser(id);
             if (result == null)
             {
@@ -93,10 +94,11 @@ namespace Rimmon.WebApiTest.Controllers
             return this.Ok(users);
         }
 
-        [HttpPatch]
+        [HttpPost]
         [Route("{id}/unblock")]
         public async Task<IHttpActionResult> UnblockUser(long id)
         {
+            // TODO: REST anti-pattern; use Deltas from OData and HttpPatch.
             User result = await this._userManagement.UnblockUser(id);
             if (result == null)
             {
