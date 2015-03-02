@@ -71,6 +71,7 @@ namespace Rimmon.WebApiTest
             {
                 registry.For<IProfileManagement>().Use<ProfileManagement>();
                 registry.For<ISecurityManagement>().Use<SecurityManagement>();
+                registry.For<IUserManagement>().Use<UserManagement>();
                 registry.For<IAuthorizationTokenProvider>().Use<JwtAuthorizationTokenProvider>();
             });
             config.DependencyResolver = new StructureMapDependencyResolver(container);
